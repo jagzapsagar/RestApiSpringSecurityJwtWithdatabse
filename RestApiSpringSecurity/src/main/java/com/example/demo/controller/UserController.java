@@ -1,10 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.config.JwtUtil;
+import com.example.demo.dto.EmployeeDTO;
 import com.example.demo.entity.Employee;
 import com.example.demo.jwt.AuthenticationRequest;
 import com.example.demo.jwt.AuthenticationResponse;
 import com.example.demo.repo.UserRepo;
+import com.example.demo.services.EmployeeService;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +37,8 @@ public class UserController {
 
 	@Autowired
 	private UserRepo UserRepo;
+	@Autowired
+	private EmployeeService employeeService;
 	
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -72,19 +76,20 @@ public class UserController {
 
 
 	@GetMapping("/getall")
-	public List<Employee> getAll() {
-		return UserRepo.findAll();
+	public List<EmployeeDTO> getAll() {
+		return employeeService.getAll();
+		//return UserRepo.findAll();
 
 	}
 
 	
 	@GetMapping("/get/{id}")
 	//@PreAuthorize("hasAuthority('USER')")  //Alternative for RequestMather in config file Method level Authrization
-	public ResponseEntity<Employee> getById(@PathVariable Integer id) {
+	public ResponseEntity<EmployeeDTO> getById(@PathVariable Integer id) {
 
 		try {
-			Employee emp = UserRepo.findById(id).orElseThrow(() -> new Exception("Employee not found with id: " + id));
-			return new ResponseEntity<>(emp, HttpStatus.OK);
+			EmployeeDTO empd = employeeService.getById(id);
+			return new ResponseEntity<>(empd, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
