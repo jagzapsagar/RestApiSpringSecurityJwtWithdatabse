@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name= "UserInfo")
@@ -14,7 +17,12 @@ public class UsersInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    
+    @NotNull(message = "Email cannot be null")
+    @Email(message = "Please provide a valid email address")
+    @Size(max = 100, message = "Email length should not exceed 100 characters")
     private String email;
+    
     private String password;
     private String roles;
 	public UsersInfo() {

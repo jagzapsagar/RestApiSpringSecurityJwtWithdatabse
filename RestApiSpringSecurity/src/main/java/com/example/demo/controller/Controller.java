@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.UsersInfo;
 import com.example.demo.repo.UserInfoRepo;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/adduser")
 public class Controller {
@@ -33,7 +35,7 @@ public class Controller {
 	 
 	
 	@PostMapping("/post")
-	public ResponseEntity<Object> save(@RequestBody UsersInfo usersInfo) {
+	public ResponseEntity<Object> save(@Valid @RequestBody UsersInfo usersInfo) {
 		// Check if the employee object has an ID
 		if (usersInfo.getId() != 0) {
 			// If ID is provided, check if it already exists in the database
