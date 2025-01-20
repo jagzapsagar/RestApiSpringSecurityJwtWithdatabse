@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.convertor.EmployeeMapper;
 import com.example.demo.dto.EmployeeDTO;
 import com.example.demo.entity.Employee;
+import com.example.demo.exception.UserNotFoundException;
 import com.example.demo.repo.UserRepo;
 
 @Service
@@ -30,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeDTO getById(int id) {
-		Employee emp = userRepo.findById(id).orElseThrow( () -> new NoSuchElementException("User not Found"));
+		Employee emp = userRepo.findById(id).orElseThrow( () -> new UserNotFoundException("User not Found from service"));
 		EmployeeDTO dto = employeeMapper.ConvertToDTO(emp);
 		return dto;
 	}

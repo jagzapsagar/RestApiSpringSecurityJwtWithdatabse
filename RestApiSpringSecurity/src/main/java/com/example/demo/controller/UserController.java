@@ -86,7 +86,7 @@ public class UserController {
 	@GetMapping("/get/{id}")
 	//@PreAuthorize("hasAuthority('USER')")  //Alternative for RequestMather in config file Method level Authrization
 	public ResponseEntity<EmployeeDTO> getById(@PathVariable Integer id) {
-
+		//EmployeeDTO empd = employeeService.getById(id);
 		try {
 			EmployeeDTO empd = employeeService.getById(id);
 			return new ResponseEntity<>(empd, HttpStatus.OK);
