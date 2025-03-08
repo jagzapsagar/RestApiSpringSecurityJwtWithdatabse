@@ -60,9 +60,9 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable())
 
 				// Set up authorization rules
-				.authorizeHttpRequests(authz -> authz.requestMatchers("/home/authenticate","/adduser/post").permitAll()
-						.requestMatchers("/home/getall", "/home/get/**").hasRole("USER")
-						.requestMatchers("/home/post", "/home/put").hasRole("ADMIN")
+				.authorizeHttpRequests(authz -> authz.requestMatchers("/emp/authenticate","/adduser/post").permitAll()
+						.requestMatchers("/emp/getall", "/emp/get/**").hasRole("USER")
+						.requestMatchers("/emp/post", "/emp/put").hasRole("ADMIN")
 						.anyRequest().authenticated() // All other requests must be authenticated
 				)
 
