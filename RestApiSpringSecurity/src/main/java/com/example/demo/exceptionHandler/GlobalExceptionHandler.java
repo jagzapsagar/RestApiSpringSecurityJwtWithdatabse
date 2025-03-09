@@ -34,8 +34,8 @@ public class GlobalExceptionHandler {
 		ErrorResponse er = new ErrorResponse();
 		er.setMessage(e.getMessage());
 		er.setTimestamp(LocalDate.now().toString());
-		er.setDetails("Not Found User");
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		er.setDetails("--------Not Found User---------");
+		
 		
 		return new ResponseEntity<>(er,HttpStatus.NOT_FOUND);
 		
