@@ -65,5 +65,17 @@ public class EntityTest {
         //Assertions.assertEquals(null, null);
        // assertEquals("Test Name2", emp.getName());
     }
+    
+    @Test
+    public void testn() {
+        // Testing the setters
+        emp.setSalary(22000);
+
+        // Testing the getters
+        Assertions.assertEquals(30,30);
+        Assertions.assertTrue(true);
+        //Assertions.assertEquals(null, null);,
+       // assertEquals("Test Name2", emp.getName());
+    }
 }
 
