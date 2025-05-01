@@ -8,6 +8,8 @@ import com.example.demo.jwt.AuthenticationResponse;
 import com.example.demo.repo.EmployeeRepository;
 import com.example.demo.services.EmployeeService;
 
+import jakarta.validation.Valid;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,16 +93,22 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/post")
-	public ResponseEntity<Object> save(@RequestBody Employee emp) {
+	public ResponseEntity<Object> save(@Valid @RequestBody Employee emp) {
 		return employeeService.save(emp);
 
 	}
 
 	@PutMapping("/put")
 	public ResponseEntity<Object> update(@RequestBody Employee emp) {
-
 		return employeeService.update(emp);
 
+	}
+	
+	@DeleteMapping
+	public ResponseEntity<Object> delete(@PathVariable int id){
+		String message = employeeService.deleteById(id);
+		return ResponseEntity.ok().body(message); // HTTP 200 OK with success message
+		
 	}
 
 }
