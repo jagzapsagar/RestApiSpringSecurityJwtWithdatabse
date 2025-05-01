@@ -12,6 +12,7 @@ public interface EmployeeService {
 	EmployeeDTO getById(int id);
 	ResponseEntity<Object> save(Employee emp);
 	ResponseEntity<Object> update(Employee emp);
+	String deleteById(int id);
 	
 
 }

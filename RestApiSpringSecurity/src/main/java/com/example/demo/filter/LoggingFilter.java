@@ -29,9 +29,15 @@ public class LoggingFilter implements Filter {
 		logger.info("Method: {}", httpRequest.getMethod());
 		logger.info("Remote Addr: {}", httpRequest.getRemoteAddr());
 
-		// log headers needed
+		// log headers
 		httpRequest.getHeaderNames().asIterator()
 				.forEachRemaining(header -> logger.info("{}: {}", header, httpRequest.getHeader(header)));
+
+		long start = System.currentTimeMillis();
+		chain.doFilter(request, response);
+		long duration = System.currentTimeMillis() - start;
+
+		logger.info("⏱️ Time taken: {} ms", duration);
 
 		// Continue the filter chain
 		chain.doFilter(request, response);

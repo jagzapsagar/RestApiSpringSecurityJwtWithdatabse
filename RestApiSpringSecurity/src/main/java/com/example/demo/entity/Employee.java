@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "RestApiSpringSecurity")
@@ -16,13 +17,15 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-	
+	@NotNull(message = "Name cannot be null")
 	@Column( name= "NAME")
 	private String name;
 	
+	@NotNull(message = "Address cannot be null")
 	@Column( name= "ADDRESS")
 	private String address;
 	
+	@NotNull(message = "Salary cannot be null")
 	@Column( name= "SALARY")
 	private int salary;
 

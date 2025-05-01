@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeMapper employeeMapper;
 
+	@Cacheable("employees")
 	@Override
 	public List<EmployeeDTO> getAll() {
 		// TODO Auto-generated method stub
@@ -93,6 +95,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 				Map<String, String> errorResponse = new HashMap<>();
 				errorResponse.put("error", "Employee ID must be provided for update.");
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+	}
+
+	@Override
+	public String deleteById(int id) {
+		// TODO Auto-generated method stub
+		if(employeeRepo.existsById(id)) {
+			employeeRepo.deleteById(id);
+			return "Employee deleted successfully";
+		}else {
+            throw new UserNotFoundException("Employee with ID " + id + " not found");
+        }
+		
+		
 	}
 
 }
